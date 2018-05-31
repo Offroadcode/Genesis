@@ -1,0 +1,16 @@
+/*
+
+ANIMATION
+=========
+
+Any basic, custom animation styles can go here. 
+
+For scroll triggered animations, it's worth checking out http://mynameismatthieu.com/WOW/
+
+*/
+
+/* Hover animation */
+// Use: @include hover-fade;
+@mixin hover-fade {
+	transition: all 0.3s ease 0s;
+	}
