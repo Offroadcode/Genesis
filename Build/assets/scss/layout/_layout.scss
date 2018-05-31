@@ -17,12 +17,10 @@ html {
 body {
 	padding: 0;
 	margin: 100px auto;
-	width: 1140px;
-	@include bg($white,1);
+	//width: 1140px;
+	@include bg($white,1); 
 	@include color($grey-base,1);
-	background-color: red;
-
-	//max-width: $bp-xlarge;
+	max-width: $bp-xlarge;
 	margin-left: auto;
 	margin-right: auto;
 	}
@@ -34,6 +32,7 @@ body {
 	grid-template-rows: 160px;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-gap: 20px 20px;
+	margin-top: 110vh;
 	}
 
 	div {
@@ -69,6 +68,9 @@ body {
 
 
 
+	.above-fold {
+		border: 10px solid green;
+		}
 
 
 	.header {

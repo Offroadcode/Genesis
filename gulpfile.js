@@ -2,7 +2,7 @@
  
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
-var runSequence = require('run-sequence');
+//var runSequence = require('run-sequence');
 var del = require('del');
 var sass = require('gulp-sass');
 var jshint = require('gulp-jshint');
@@ -12,6 +12,8 @@ var rename = require('gulp-rename');
 var watchify = require('watchify');
 var sourcemaps = require('gulp-sourcemaps');
 var gutil = require('gulp-util');
+var critical = require('critical');
+var runSequence = require('run-sequence').use(gulp);
 var postcss = require('gulp-postcss');
 var svgstore = require('gulp-svgstore');
 var svgmin = require('gulp-svgmin');
@@ -139,20 +141,46 @@ gulp.task('watch', function() {
 });
 
 
+// Critical CSS extraction 
+gulp.task('critical-css', function(cb) {
+    
+    critical.generate({
+        base: 'Build/',
+        src: 'http://genesis.local/',
+        dest: 'assets/css/critical.css',
+        width: 320,
+        height: 480,
+        inline: false
+    });
+
+});
+
+
+
+
+
 // Builds everything
 gulp.task('build', function( callback ){
     runSequence(
-        ['sass',  'svgstore', 'imagemin', 'scripts', 'fileinclude', 'watch'], 
+        ['sass', 'svgstore', 'imagemin', 'scripts', 'fileinclude', 'watch'], 
         callback
     );
 });
 
-gulp.task('build:serve', function( callback ){
+gulp.task('serve', function( callback ){
     runSequence(
-        ['sass',  'svgstore', 'imagemin', 'scripts', 'fileinclude', 'watch'], 
+        ['sass', 'svgstore', 'imagemin', 'scripts', 'fileinclude', 'watch'], 
         callback
     );
 });
+
+gulp.task('critical', function( callback ){
+    runSequence(
+        ['critical-css'], 
+        callback
+    );
+});
+
 
 /**
  * Run Browsersync with server config
