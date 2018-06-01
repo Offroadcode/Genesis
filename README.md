@@ -1,73 +1,66 @@
-# Using the Starter Kit
+# GENESIS
 
-*Please note: While you're welcome to use this starter kit for your own projects, it comes as-is and we don't specifically offer support for it because it's an internal tool for our use. If you have any questions, please feel free to ask, we'll do our best to help but we can't guarantee a speedy response or solution :)*
+Readme needs updating to include setup and config info etc. 
 
-## Things you need to have installed
+This starter kit is an internal tool for use by the Offroadcode team and helps set a few base tasks and styles up as well as creating the start of a folder structure we use on our projects. 
+
+## Getting started 
+
+Genesis uses Sass for CSS and Gulp as a task runner, please ensure you have both these installed and running in your local environment before use. 
 
 Your local dev environment probably already has this stuff installed anyway but it might be worth checking if everything is there.
 
 * Ruby
 * Sass
 * Node.js
-* Grunt
-* [Imagemagick](http://www.imagemagick.org/script/install-source.php)
+* Gulp [Getting that set up](https://github.com/gulpjs/gulp/blob/v3.9.1/docs/getting-started.md)
 
-## Gulp
+We're currently using Gulp for our task management and there are some standard tasks set up in the `gulpfile.js` config in the root folder but you're welcome to add to them on a per project basis if you need other jobs doing beyond what's there. 
 
-We're currently using Grunt for our task management and there are some basic tasks set up in the `Gruntfile.js` config but you're welcome to add to them on a per project basis if you need other jobs doing beyond what's there. 
-
-## Getting set up in your working directory / theme folder
-
-Install the Grunt tasks we use so in command line/terminal cd to the project directory, and run `npm install`
-
-It might also be prudent once everything is installed, to run `grunt devupdates` if you've not used this starter kit for a while. This will check for any updates to devDepenedencies and dependencies and advise which versions are current. 
-
-Dev updates is currently set to just report what updates are available and not automatically update so if you do wish to update, edit the version numbers in the `package.json` file in the project root. 
-
-## Grunt tasks
+## Gulp tasks
 
 ### JS Minify & Concatenation
 
-If you need to add new JS files to the project, simply drop them into `/js/app/` and Grunt will minify and concatenate everything.
+If you need to add new JS files to the project, simply drop them into `/js/app/` if it's code we've written and if it's 3rd party JS (plugins, widgets etc) they go in the `/js/libs/` folder. Gulp will watch, minify and concatenate everything into the build folder.
 
-You don't need to reference them in the HTML, Grunt will run the task and compile them all into `production.js` which is referenced at the bottom of your HTML template above the `</body>` tag.
+You don't need to reference them in the HTML, Gulp will run the task and compile them all into `/js/build/production.js`. 
 
-For the time being, files in `/js/libs/` need referencing in HTML and are not processed in Grunt.
+The `/js/build/production.js` file is then minified into `/js/build/production.min.js` which is what you should reference in your HTML template above the closing `</body>` tag.
 
 ### Image optimisation
 
-Any images located in `/assets/images/` (jpg, png, gif) are automatically optimised and re-saved with the same name/paths when Grunt is run
+All images should be saved into the `/assets/img-raw/` folder. Gulp monitors this folder and optimises all the images in here and then copies them into `/assets/img/` - It is the images in the `img` folder you should reference in your template code.
 
-Image optimisation will normally be handled by Umbraco / imagegen on the server but it's handy to run this command on any site assets that might not be uploaded and processed via the CMS.
+## SVG optimisation
+
+Gulp runs an SVG optimisation task on any file with the svg extension and merges them into a single sprite which from which you can reference individiual SVG ID's. This is compiled and saved into a file called `icon-sprite.svg` in the `/img/` folder.
 
 ### Sass compilation
 
-All files in `/assets/sass/` are automatically compiled and minified and then output to `/assets/css/screen.css` which is referenced in the HTML
+All files in `/assets/scss/` are automatically compiled and minified and then output to `/assets/css/screen.css` which is referenced in the HTML.
 
 Do not under any circumstances edit `/assets/css/screen.css`, any changes you make will be lost next time Sass is compiled.
 
-If you need to add a new scss file for some reason, you can do so by creating a `_yourfilename.scss` file (the underscore is needed) and you can then reference that in `/assets/sass/screen.scss` and it'll compile next time Grunt runs.
+If you need to add a new scss file for some reason, you can do so by creating a `_yourfilename.scss` file (the underscore is needed) and you can then reference that in `/assets/scss/screen.scss` and it'll compile next time Gulp runs.
 
-Any file created in `/assets/sass/` (including sub folders) is watched and compiled as long as you reference it in the `screen.scss` file.
+Any file created in `/assets/scss/` (including sub folders) is watched and compiled as long as you reference it in the `screen.scss` file.
+
+## Critical CSS
+
+When possible, to improve performance we should use inlining of critical CSS. This requires a manual tweak to the gulpfile.js file settings. You can generate the critical CSS for the site by running the gulp task `gulp critical` rather than the standard `gulp` task which does not run critical css by default. 
+
+When run, this scans the target page at the resolution you set and outputs the relevant critical CSS into `/assets/css/critical.css`. 
+
+To implement this, you will need to copy and paste the CSS from that file into the head of your document. Read about [understanding critical CSS on Smashing Magazine](https://www.smashingmagazine.com/2015/08/understanding-critical-css/). If you're not sure how to implement this though, just ask. 
 
 ### CSS Prefixing
 
-You don't need to include browser specific prefixing for properties, they're automatically added when Grunt compiles the
-Sass so just add un-prefixed properties and if they're needed it's taken care of.
+You don't need to include browser specific prefixing for properties, they're automatically added when Gulp compiles the Sass so just add un-prefixed properties and if they're needed it's taken care of. You can specify the browsers you're targeting in the top of the Gulp file and it will generate the relevant prefixes. 
 
-### Autoprefixing CSS
 
-You can edit `Gruntfile.js` to specify how many browser versions you want to support and provide autoprefixes for. It's just set for last 2 browser versions by default. 
-
-## Grunt Tasks
+## Gulp Tasks
 
 There's a couple of simple tasks to save you running everything each time. They are:
 
-* `grunt` - Just compiles, autoprefixes and watches your Sass while doing local dev
-* `grunt build` - Compiles your Sass, concatenates all your JS into a production file and builds Modernizr
-* `grunt assets` - Optimises image and script assets ready for release
-* `grunt devupdates` - Only need to run at the start of a new project to check if dependencies need updating
-
-## Additional scripts
-
-The starter kit does include a couple of scripts and scaffolds that I consider useful and have found common need for on projects so delete as necessary. They are:
+* `gulp` - Watch, compile, concatenate for JS and Sass along with image optimisation and SVG sprite generation. 
+* `gulp critical` - Generates your Critical CSS only
