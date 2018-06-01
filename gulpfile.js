@@ -141,7 +141,7 @@ gulp.task('watch', function() {
 });
 
 
-// Critical CSS extraction https://github.com/addyosmani/critical
+// Critical CSS extraction 
 gulp.task('critical-css', function(cb) {
     
     critical.generate({
@@ -159,27 +159,19 @@ gulp.task('critical-css', function(cb) {
 
 
 
-// Builds everything
-gulp.task('build', function( callback ){
+// Default task
+gulp.task('default', function( callback ){
     runSequence(
         ['sass', 'svgstore', 'imagemin', 'scripts', 'fileinclude', 'watch'], 
         callback
     );
 });
 
+
+// Generate Critical CSS only
 gulp.task('critical', function( callback ){
     runSequence(
         ['critical-css'], 
         callback
     );
-});
-
-
-/**
- * Run Browsersync with server config
- */
-gulp.task('default', ['build:serve'], function() {
-    gulp.watch('**/*.scss', { cwd: 'Build/assets/scss/' }, ['sass']);
-    gulp.watch('**/*.svg', { cwd: 'Build/assets/img/' }, ['svgstore']);
-    gulp.watch('*', { cwd: 'Build/assets/img/' }, ['imagemin']);
 });
