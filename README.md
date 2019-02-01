@@ -51,6 +51,12 @@ When run, this scans the target page at the resolution you set and outputs the r
 
 To implement this, you will need to copy and paste the CSS from that file into the head of your document. Read about [understanding critical CSS on Smashing Magazine](https://www.smashingmagazine.com/2015/08/understanding-critical-css/). If you're not sure how to implement this though, just ask. 
 
+### Critical CSS Gotchas
+
+1. Critical CSS can be a pain in the arse frankly and you need to be aware of changes across multiple pages and ultimately checking it is quite a manual process so although it has some benefits for that first paint view of the website, it's incredibly easy for things to break. 
+
+2. In Umbraco cshtml templates, when inlining the CSS code, you will need to ensure any `@` symbols (eg. In media queries) are written as `@@` otherwise the template will try to parse them as code not CSS.
+
 ### CSS Prefixing
 
 You don't need to include browser specific prefixing for properties, they're automatically added when Gulp compiles the Sass so just add un-prefixed properties and if they're needed it's taken care of. You can specify the browsers you're targeting in the top of the Gulp file and it will generate the relevant prefixes. 
@@ -61,4 +67,4 @@ You don't need to include browser specific prefixing for properties, they're aut
 There's a couple of simple tasks to save you running everything each time. They are:
 
 * `gulp` - Watch, compile, concatenate for JS and Sass along with image optimisation and SVG sprite generation. 
-* `gulp critical` - Generates your Critical CSS only
+* `gulp critical` - Generates your Critical CSS only (See above for gotchas using critical CSS)
