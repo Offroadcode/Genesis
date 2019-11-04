@@ -135,9 +135,9 @@ gulp.task('scripts', function() {
  
 // Watch Files For Changes - https://travismaynard.com/writing/getting-started-with-gulp
 gulp.task('watch', function() {
-    gulp.watch('Build/assets/js/libs/*.js', ['scripts']);
-    gulp.watch('Build/assets/js/app/*.js', ['scripts']);
-    gulp.watch('Build/assets/scss/**/*.scss', ['sass']);
+    gulp.watch('Build/assets/js/libs/*.js', gulp.series('scripts'));
+    gulp.watch('Build/assets/js/app/*.js', gulp.series('scripts'));
+    gulp.watch('Build/assets/scss/**/*.scss', gulp.series('sass'));
 });
 
 
