@@ -108,3 +108,39 @@ gulp.task('watch', function() {
     gulp.watch('Build/assets/js/app/*.js', gulp.series('scripts'));
     gulp.watch('Build/assets/scss/**/*.scss', gulp.series('sass'));
 });
+
+
+// Critical CSS extraction 
+gulp.task('critical-css', function(cb) {
+    
+    critical.generate({
+        base: 'Build/',
+        src: 'http://genesis.local/',
+        dest: 'assets/css/critical.css',
+        width: 320,
+        height: 480,
+        inline: false
+    });
+
+});
+
+
+
+
+
+// Default task
+gulp.task('default', function( callback ){
+    runSequence(
+        ['sass', 'svgstore', 'imagemin', 'scripts', 'fileinclude', 'watch'], 
+        callback
+    );
+});
+
+
+// Generate Critical CSS only
+gulp.task('critical', function( callback ){
+    runSequence(
+        ['critical-css'], 
+        callback
+    );
+});
