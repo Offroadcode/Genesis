@@ -50,50 +50,17 @@
 	<meta name="msapplication-TileColor" content="#2d89ef">
 	<meta name="theme-color" content="#ffffff">
 
+	<link rel="stylesheet" href="assets/production/css/screen.css?cb=123" />
+
 </head>
 
-<body class=" transition-fade" id="swup">
+<body>
 	
-	
-
-	
-
-
-
-
-	<!-- Load remaining non-critical CSS -->
-    <script>
-        var cb = function() {
-        var l = document.createElement('link'); l.rel = 'stylesheet';
-        l.href = '/assets/css/screen.css';
-        var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
-        };
-        var raf = requestAnimationFrame || mozRequestAnimationFrame ||
-        webkitRequestAnimationFrame || msRequestAnimationFrame;
-        if (raf) raf(cb);
-        else window.addEventListener('load', cb);
-    </script>
-    <noscript>
-		<link href="/assets/css/screen.css" rel="stylesheet">
-	</noscript>
+	<h1>Genesis</h1>	
+	<p>The Offroadcode starter kit</p>
 
 	<!-- Scripts-->
-	<script rel="preload" as="script" src="/assets/js/build/production.min.js"></script>
-
-	<script>
-	let options = {
-        LINK_SELECTOR: 'a[href^="/"]:not([data-no-swup]), a[href^="#"]:not([data-no-swup]), a[xlink\\:href]',
-        elements: [
-            '#swup'
-        ],
-        animationSelector: '[class^="a-"]',
-        cache: true,
-        pageClassPrefix: '',
-        scroll: true,
-        preload: true,
-        disableIE: false
-    }
-	</script>
+	<script rel="preload" as="script" src="/assets/production/js/all.js?cb=123"></script>
 	<!-- Scripts -->
 
 </body>

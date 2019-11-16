@@ -16,13 +16,10 @@ html {
 
 body {
 	padding: 0;
-	margin: 100px auto;
-	//width: 1140px;
-	@include bg($white,1); 
+	margin: 0;
+	@include bg($white,1);
 	@include color($grey-base,1);
 	max-width: $bp-xlarge;
-	margin-left: auto;
-	margin-right: auto;
 	}
 
 // Content layout 
