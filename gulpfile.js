@@ -41,21 +41,12 @@ function jsTask(){
     );
 }
 
-// Cachebust
-var cbString = new Date().getTime();
-function cacheBustTask(){
-    return src(['Build/index.html'])
-        .pipe(replace(/cb=\d+/g, 'cb=' + cbString))
-        .pipe(dest('.'));
-}
-
 // Watch task: watch SCSS and JS files for changes
 // If any change, run scss and js tasks simultaneously
 function watchTask(){
     watch([files.scssPath, files.jsPath], 
         series(
-            parallel(scssTask, jsTask),
-            cacheBustTask
+            parallel(scssTask, jsTask)
         )
     );    
 }
@@ -65,6 +56,5 @@ function watchTask(){
 // then runs cacheBust, then watch task
 exports.default = series(
     parallel(scssTask, jsTask), 
-    cacheBustTask,
     watchTask
 );
