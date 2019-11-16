@@ -55,6 +55,8 @@ You don't need to include browser specific prefixing for properties, they're aut
 
 For simplicity, there's a single Gulp task. 
 
+If you're using a Windows machine you can simply double-click the `StartDev.bat` file in the root of the site and it'll launch the Gulp task for you. If you're not, just run it as normal in a command line and use:
+
 * `gulp` - Watch, compile, concatenate for JS and Sass and cache bust
 
 Some more complicated projects may also make use of Webpack for compiling react but this will be documented on a project by project basis. 
