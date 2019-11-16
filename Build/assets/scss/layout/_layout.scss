@@ -16,7 +16,7 @@ html {
 
 body {
 	padding: 0;
-	margin: 0;
+	margin: 0 auto;
 	@include bg($white,1);
 	@include color($grey-base,1);
 	max-width: $bp-xlarge;
