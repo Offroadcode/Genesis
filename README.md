@@ -51,6 +51,10 @@ Any file created in `/assets/scss/` (including sub folders) is watched and compi
 
 You don't need to include browser specific prefixing for properties, they're automatically added when Gulp compiles the Sass so just add un-prefixed properties and if they're needed it's taken care of. You can specify the browsers you're targeting in the top of the Gulp file and it will generate the relevant prefixes. 
 
+### Image Otimisation
+
+For any image assets (jpg, gif, svg, png) that aren't managed by CMS, these go into the `/assets/images/` folder and are automatically watched and optimised using gulp-imagemin and a production version is output to `assets/production/images/` - It is the production version of the image you need to reference in your code. 
+
 ## Gulp Tasks
 
 For simplicity, there's a single Gulp task. 
