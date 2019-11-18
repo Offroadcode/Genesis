@@ -67,7 +67,3 @@ exports.default = series(
     parallel(imgSquash, scssTask, jsTask), 
     watchTask
 );
-
-/*gulp.task("watch", () => {
-gulp.watch("Build/assets/images/*", imgSquash);
-});*/
