@@ -10,6 +10,7 @@ Grid structure for this project uses flexbox and the grid layout is applied in t
 */
 
 html {
+	@include bg($white,1);
 	overflow-x: hidden;
 	min-height: 100vh;
 	}
@@ -17,9 +18,32 @@ html {
 body {
 	padding: 0;
 	margin: 0 auto;
-	@include bg($white,1);
 	@include color($grey-base,1);
 	max-width: $bp-xlarge;
 	}
 
-// Content layout 
+
+
+
+// START: Additional styles just for the repo page - you can delete these
+html {
+	background-color: transparent;
+	background-image: url(../images/background-pattern.svg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	}
+
+body {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	}
+
+	.intro {
+		@include bg($white,1);
+		padding: $space;
+		margin: auto;
+		border-radius: $radius-s;
+		box-shadow: 0 0 5px $grey-base;
+		}
+// END: Additional styles just for the repo page - you can delete these
